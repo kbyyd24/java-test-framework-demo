@@ -1,11 +1,20 @@
 package cn.gaoyuexiang.demo.marsrover
 
-class MarsRover(
+data class MarsRover(
   private val position: Position,
   private val direction: Direction,
 ) {
-  fun report(): MarsRoverInfo{
+  fun report(): MarsRoverInfo {
     return MarsRoverInfo(position = position, direction = direction)
+  }
+
+  fun forward(length: Int): MarsRover {
+    return when (direction) {
+      Direction.EAST -> this.copy(position = position.copy(x = position.x + length))
+      Direction.WEST -> this.copy(position = position.copy(x = position.x - length))
+      Direction.SOUTH -> this.copy(position = position.copy(y = position.y - length))
+      Direction.NORTH -> this.copy(position = position.copy(y = position.y + length))
+    }
   }
 }
 
