@@ -1,0 +1,13 @@
+= Demo for Test Frameworks
+
+This repo shows demos of test Frameworks in Java. Include `JUnit5`, `Spock`, `Spek` and `Kotest`.
+
+The demo shows unit tests and Spring integration tests.
+
+== For Spock Spring Integration Test
+
+The `MarsRoverSpockTest` is ignored. This is because the `io.kotest.extensions:kotest-extensions-spring` dependency leads NPE when run the test. This library is required by JUnit and Kotest for using `@MockkBean` annotation.
+
+There is an issue https://github.com/Ninja-Squad/springmockk/issues/67[here] for details.
+
+If you want to run the test, need to remove the dependency of `io.kotest.extensions:kotest-extensions-spring` and `@Ignore` annotation. And also remove `MarsRoverServiceJUnitTest` and `MarsRoverServiceKotestTest`, because they depend on the library.
