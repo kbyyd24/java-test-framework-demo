@@ -31,6 +31,6 @@ class MarsRoverServiceSpockTest extends Specification {
     service.forward(id, 3)
 
     then:
-    1 * repository.save(_)
+    1 * repository.save({ it.position == new Position(1, 5) })
   }
 }
