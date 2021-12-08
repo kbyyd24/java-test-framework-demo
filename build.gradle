@@ -21,7 +21,6 @@ dependencies {
   testImplementation 'org.assertj:assertj-core:3.21.0'
 
   // spock
-  testRuntimeOnly "org.junit.vintage:junit-vintage-engine"
   testImplementation 'org.spockframework:spock-core:2.0-groovy-3.0'
   testImplementation 'org.spockframework:spock-spring:2.0-groovy-3.0'
   testImplementation 'org.codehaus.groovy:groovy-all:3.0.8'
