@@ -23,7 +23,6 @@ dependencies {
   // spock
   testImplementation 'org.spockframework:spock-core:2.0-groovy-3.0'
   testImplementation 'org.spockframework:spock-spring:2.0-groovy-3.0'
-  testImplementation 'org.codehaus.groovy:groovy-all:3.0.8'
 
   // spek
   testImplementation "org.spekframework.spek2:spek-dsl-jvm:2.0.17"
