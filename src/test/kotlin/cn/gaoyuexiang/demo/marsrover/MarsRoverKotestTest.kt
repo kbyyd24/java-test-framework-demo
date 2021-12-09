@@ -1,42 +1,37 @@
 package cn.gaoyuexiang.demo.marsrover
 
-import io.kotest.core.spec.style.BehaviorSpec
+import io.kotest.core.spec.style.FunSpec
+import io.kotest.datatest.withData
 import io.kotest.matchers.shouldBe
 
-class MarsRoverKotestTest : BehaviorSpec({
-  given("a mars rover") {
+class MarsRoverKotestTest : FunSpec({
+  test("should return mars rover position and direction when mars rover report") {
     val marsRover = MarsRover(
       position = Position(1, 2),
       direction = Direction.EAST,
     )
-    `when`("it report information") {
-      val (position, direction) = marsRover.report()
-      then("get it's position and direction") {
-        position shouldBe Position(1, 2)
-        direction shouldBe Direction.EAST
-      }
-    }
+    val (position, direction) = marsRover.report()
+    position shouldBe Position(1, 2)
+    direction shouldBe Direction.EAST
   }
 
-  listOf(
-    Triple(Direction.EAST, 2, Position(3, 2)),
-    Triple(Direction.WEST, 3, Position(-2, 2)),
-    Triple(Direction.SOUTH, -1, Position(1, 3)),
-    Triple(Direction.NORTH, 1, Position(1, 3)),
-  )
-    .forEach {(direction, length, movedPosition) ->
-      given("a mars rover at 1,2 and direction is $direction") {
-        val  marsRover = MarsRover(
-          position = Position(1,2),
-          direction = direction,
-        )
-        `when`("it move forward for $length units") {
-          val movedMarsRover = marsRover.forward(length)
-          then("it position changed to ${movedPosition.x},${movedPosition.y} and direction not change") {
-            movedMarsRover.report().position shouldBe movedPosition
-            movedMarsRover.report().direction shouldBe direction
-          }
-        }
-      }
+  context("data test") {
+    withData(
+      nameFn = { (direction, length, position) ->
+        "should move mars rover from 1,2 to ${position.x},${position.y} when direction is $direction and move length is $length"
+      },
+      Triple(Direction.EAST, 2, Position(3, 2)),
+      Triple(Direction.WEST, 3, Position(-2, 2)),
+      Triple(Direction.SOUTH, -1, Position(1, 3)),
+      Triple(Direction.NORTH, 1, Position(1, 3)),
+    ) { (direction, length, movedPosition) ->
+      val marsRover = MarsRover(
+        position = Position(1, 2),
+        direction = direction,
+      )
+      val movedMarsRover = marsRover.forward(length)
+      movedMarsRover.report().position shouldBe movedPosition
+      movedMarsRover.report().direction shouldBe direction
     }
+  }
 })
