@@ -4,12 +4,9 @@ import cn.gaoyuexiang.demo.marsrover.fixture.MarsRoverFixture
 import org.spockframework.spring.SpringBean
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import spock.lang.Ignore
 import spock.lang.Specification
 
 @SpringBootTest
-@Ignore
-// Will throw NPE because using `com.ninja-squad:springmockk` and JUnit Spring integration test required it.
 class MarsRoverServiceSpockTest extends Specification {
   @SpringBean
   MarsRoverRepository repository = Mock()
